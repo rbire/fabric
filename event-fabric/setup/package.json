@@ -1,0 +1,16 @@
+{
+    "name": "fabric-setup",
+    "version": "1.0.0",
+    "description": "Hyperledger Fabric Setup Application",
+    "main": "server.js",
+    "dependencies": {
+        "fabric-ca-client": "^1.0.2",
+        "fabric-client": "^1.0.2",
+        "grpc": "^1.6.0"
+    },
+    "license": "Apache-2.0",
+    "keywords": [
+        "Hyperledger",
+        "Fabric"
+    ]
+}
