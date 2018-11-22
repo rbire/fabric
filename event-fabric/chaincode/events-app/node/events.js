@@ -44,26 +44,30 @@ let Chaincode = class {
   }
 
   async recordEvents(stub, args) {
-    if (args.length != 5) {
-      throw new Error('Incorrect number of arguments. Expecting 5');
-    }
-    var events = {
+    /*var events = {
       docType: 'events',
       category: args[1],
       name: args[2],
       timestamp: args[3],
       data: args[4]
+    };*/
+    var events = {
+      docType: 'events'
     };
-
-    await stub.putState(args[0], Buffer.from(JSON.stringify(events)));
+    for(var n=0;n<args.length;n++){
+        events['arg_'+n] = args[n];
+    }
+    var record = JSON.stringify(events);
+    console.log(events);
+    console.log(record);
+    await stub.putState(args[0], Buffer.from(record));
   }
 
   async queryAllEvents(stub, args) {
+    var query = args[0];
+    console.log(query);
 
-    let startKey = '0';
-    let endKey = '999';
-
-    let iterator = await stub.getStateByRange(startKey, endKey);
+    let iterator = await stub.getQueryResult(query);
 
     let allResults = [];
     while (true) {
