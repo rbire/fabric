@@ -5,6 +5,7 @@ var Fabric_CA_Client = require('fabric-ca-client');
 var path = require('path');
 var util = require('util');
 var os = require('os');
+var config = require('./config.json');
 
 //
 var fabric_client = new Fabric_Client();
@@ -30,7 +31,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
     	verify: false
     };
     // be sure to change the http to https when the CA is running TLS enabled
-    fabric_ca_client = new Fabric_CA_Client('http://localhost:7054', null , '', crypto_suite);
+    fabric_ca_client = new Fabric_CA_Client(config.ca, null , '', crypto_suite);
 
     // first check to see if the admin is already enrolled
     return fabric_client.getUserContext('admin', true);
